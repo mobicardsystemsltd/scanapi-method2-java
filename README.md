@@ -37,6 +37,7 @@ JSON Success Response
     },
     "card_exif_information": {
         "card_exif_flag": 1,
+        "card_exif_tamper_flag": 0,
         "card_exif_is_instant_photo_flag": 1,
         "card_exif_original_timestamp": "",
         "card_exif_file_datetime": "2026-01-19 07:56:02",
@@ -162,6 +163,7 @@ All flags are always returned and as either 0 or 1
 | `card_information.card_token` | **Yes** | Hashed card token for reference | `"e39765...4faf"` |
 | **card_exif_information** | | | |
 | `card_exif_information.card_exif_flag` | **Yes** | EXIF data availability flag | `1` |
+| `card_exif_information.card_exif_tamper_flag` | **Yes** | EXIF data tamper flag | `0` |
 | `card_exif_information.card_exif_is_instant_photo_flag` | **Yes** | Instant photo detection flag | `1` |
 | `card_exif_information.card_exif_original_timestamp` | Only when available | Original photo timestamp | `""` |
 | `card_exif_information.card_exif_file_datetime` | Only when available | File datetime from EXIF | `"2026-01-19 07:56:02"` |
@@ -221,6 +223,9 @@ Performance Tips:
  *   Implement client-side validation first
  *   Cache successful token responses
  *   Implement retry logic with exponential backoff
- *   Monitor card_confidence_score for quality control
- *   Use card_risk_information for fraud detection
+ *   Monitor **card_confidence_score** for quality control
+ *   Use **card_risk_information** for fraud detection
+ *   Use **card_risk_information.card_risk_score** for fraud detection
+ *   Use **card_exif_information.card_exif_is_instant_photo_flag** for fraud control
+ *   Use **card_exif_information.card_exif_tamper_flag** for fraud control
  *   Handle error status codes appropriately especially 250 and 430 for smoother flow
